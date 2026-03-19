@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37027.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Budget.domain", "Budget.domain\Budget.domain.csproj", "{F5C72BEF-CF1B-4C03-B3CF-0D8F974ADAFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetWise", "BudgetWise\BudgetWise.csproj", "{C1897CB8-06FE-48C2-80B3-7EA2FFABEBAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5C72BEF-CF1B-4C03-B3CF-0D8F974ADAFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5C72BEF-CF1B-4C03-B3CF-0D8F974ADAFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5C72BEF-CF1B-4C03-B3CF-0D8F974ADAFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5C72BEF-CF1B-4C03-B3CF-0D8F974ADAFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1897CB8-06FE-48C2-80B3-7EA2FFABEBAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1897CB8-06FE-48C2-80B3-7EA2FFABEBAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1897CB8-06FE-48C2-80B3-7EA2FFABEBAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1897CB8-06FE-48C2-80B3-7EA2FFABEBAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A003A2A-7EBF-475E-A3E8-FD4572A3BE87}
+	EndGlobalSection
+EndGlobal

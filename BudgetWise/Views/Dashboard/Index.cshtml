@@ -1,0 +1,137 @@
+﻿@model Budget.domain.Models.DashboardViewModel
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "Dashboard";
+
+    var categoriesJson = JsonSerializer.Serialize(Model.ExpenseBreakdown.Keys);
+    var valuesJson = JsonSerializer.Serialize(Model.ExpenseBreakdown.Values);
+}
+
+<link rel="stylesheet" href="~/css/dashboard.css" />
+
+<div class="dashboard-page">
+    <div class="top-header">
+        <div class="brand-section">
+            <div class="brand-icon">$</div>
+            <div class="brand-text">BudgetWise</div>
+        </div>
+
+        <div class="user-section">
+            <span>Hi, nadia_cardoso_macedo</span>
+        </div>
+    </div>
+
+    <section class="overview-section">
+        <div class="overview-header">
+            <h2>Overview</h2>
+
+            <select class="time-filter">
+                <option>All time</option>
+            </select>
+        </div>
+
+        <div class="summary-cards">
+            <div class="summary-card">
+                <p class="card-title">Total Balance</p>
+                <h3>$@Model.TotalBalance.ToString("N2")</h3>
+                <span>All time</span>
+            </div>
+
+            <div class="summary-card">
+                <p class="card-title">Income</p>
+                <h3 class="income-text">+$@Model.TotalIncome.ToString("N2")</h3>
+                <span>All time</span>
+            </div>
+
+            <div class="summary-card">
+                <p class="card-title">Expenses</p>
+                <h3 class="expense-text">-$@Model.TotalExpenses.ToString("N2")</h3>
+                <span>All time</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-grid">
+        <div class="transactions-panel">
+            <div class="panel-header">
+                <h3>Recent Transactions</h3>
+                <a asp-controller="Dashboard" asp-action="Create" class="add-btn">+ Add Transaction</a>
+            </div>
+
+            <div class="transactions-list">
+                @foreach (var item in Model.RecentTransactions)
+                {
+                    var isIncome = item.Type == Budget.domain.Models.TransactionType.Income;
+
+                    <div class="transaction-row">
+                        <div class="transaction-left">
+                            <div class="transaction-icon @(isIncome ? "icon-income" : "icon-expense")">
+                                @(isIncome ? "↗" : "↘")
+                            </div>
+
+                            <div class="transaction-info">
+                                <h4>@item.Description</h4>
+                                <p>@item.Category · @item.Date.ToString("MMM d, yyyy")</p>
+                            </div>
+                        </div>
+
+                        <div class="transaction-amount @(isIncome ? "income-text" : "expense-text")">
+                            @(isIncome ? "+" : "-")$@item.Amount.ToString("N2")
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="chart-panel">
+            <div class="panel-header">
+                <h3>Expense Breakdown</h3>
+            </div>
+
+            <div class="chart-wrapper">
+                <canvas id="expenseChart"></canvas>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const labels = @Html.Raw(categoriesJson);
+    const values = @Html.Raw(valuesJson);
+
+    const ctx = document.getElementById('expenseChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: [
+                    '#2a9d8f',
+                    '#e76f51',
+                    '#f4c430',
+                    '#7e57c2',
+                    '#3da5d9',
+                    '#52b788',
+                    '#d63384',
+                    '#6c757d'
+                ],
+                borderColor: '#ffffff',
+                borderWidth: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '58%',
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
