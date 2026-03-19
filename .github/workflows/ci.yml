@@ -23,8 +23,5 @@ jobs:
       - name: Build
         run: dotnet build ./BudgetWise/BudgetWise.csproj --configuration Release --no-restore
 
-      # ⚠️ REMOVE test (não tens testes ainda)
-      # evita erro
-
       - name: Build Docker image
         run: docker build -t budget-app .
